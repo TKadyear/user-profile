@@ -13,7 +13,7 @@ export default {
   },
   data() {
     return {
-      listUserNames: []
+      listUserNames: ["mojombo", "defunkt", "pjhyett", "wycats", "ezmobius", "ivey"]
     }
   },
   async created() {
