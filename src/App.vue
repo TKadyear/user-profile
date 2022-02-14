@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import UserProfile from './components/UserProfile.vue'
 export default {
   components: {
@@ -13,14 +12,7 @@ export default {
   },
   data() {
     return {
-      listUserNames: ["mojombo", "defunkt", "pjhyett", "wycats", "ezmobius", "ivey"]
-    }
-  },
-  async created() {
-    const response = await axios.get('https://api.github.com/users')
-    const data = response.data
-    for (const i in data) {
-      this.listUserNames.push(data[i].login)
+      listUserNames: ['mojombo', 'defunkt', 'pjhyett', 'wycats', 'ezmobius', 'ivey']
     }
   }
 }
