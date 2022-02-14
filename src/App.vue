@@ -1,10 +1,11 @@
 <template>
-  <main class="w-3/4 m-auto grid grid-cols-3">
-    <UserProfile :username="user" />
+  <main class="w-3/4 m-auto grid grid-cols-3 gap-4">
+    <UserProfile v-for="user in listUserNames" :key="user" :username="user" />
   </main>
 </template>
 
 <script>
+import axios from 'axios'
 import UserProfile from './components/UserProfile.vue'
 export default {
   components: {
@@ -12,29 +13,18 @@ export default {
   },
   data() {
     return {
-      user: {}
+      listUserNames: []
     }
   },
-  created() {
-    fetch('https://api.github.com/users/mojombo')
-      .then(response => response.json())
-      .then(data => {
-        let fullYear = new Date(data.created_at)
-        fullYear = fullYear.getFullYear()
-        data.created_at = fullYear
-        this.user = data
-      })
+  async created() {
+    const response = await axios.get('https://api.github.com/users')
+    const data = response.data
+    for (const i in data) {
+      this.listUserNames.push(data[i].login)
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

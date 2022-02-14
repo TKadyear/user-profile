@@ -1,18 +1,28 @@
 <template>
   <div class="container">
-    <img :src="username.avatar_url" :alt="username.name" />
-    <p class="user-name">{{ username.name }}</p>
-    <p class="text-gray-400">Joined in {{ username.created_at }}</p>
-    <p>{{ username.bio }}</p>
+    <img :src="user.avatar_url" :alt="user.name" />
+    <p class="user-name">{{ user.name }}</p>
+    <p class="text-gray-400">Joined in {{ user.created_at }}</p>
+    <p>{{ user.bio }}</p>
     <hr />
-    <p class="text-gray-400">{{ username.following }} Friends</p>
+    <p class="text-gray-400">{{ user.following }} Friends</p>
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name: 'UserProfile',
   props: {
-    username: { type: Object, required: true }
+    username: { type: String, required: true }
+  },
+  data() {
+    return {
+      user: {}
+    }
+  },
+  async created() {
+    const response = await axios.get(`https://api.github.com/users/${this.username}`)
+    this.user = response.data
   }
 }
 </script>
