@@ -1,22 +1,18 @@
 <template>
   <div class="container">
-    <img :src="imageUserProfile" :alt="nameUser" />
-    <p class="user-name">{{ nameUser }}</p>
-    <p class="text-gray-400">Joined in {{ since }}</p>
-    <p>{{ description }}</p>
+    <img :src="username.avatar_url" :alt="username.name" />
+    <p class="user-name">{{ username.name }}</p>
+    <p class="text-gray-400">Joined in {{ username.created_at }}</p>
+    <p>{{ username.bio }}</p>
     <hr />
-    <p class="text-gray-400">{{ numberFriends }} Friends</p>
+    <p class="text-gray-400">{{ username.following }} Friends</p>
   </div>
 </template>
 <script>
 export default {
-  name: 'BoilerPlate',
+  name: 'UserProfile',
   props: {
-    nameUser: { type: String, required: true },
-    imageUserProfile: { type: String, required: true },
-    since: { type: String, required: true },
-    description: { type: String, required: true },
-    numberFriends: { type: String, required: true }
+    username: { type: Object, required: true }
   }
 }
 </script>
